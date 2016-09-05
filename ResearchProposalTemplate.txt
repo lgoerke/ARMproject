@@ -1,0 +1,58 @@
+Advanced Research Methods
+
+Research Proposal Template
+
+Group: 		D
+Members: 	Akif Berber
+		Lisa Goerke
+		Arianne van der Griend
+		Germonda Mooij
+		Ralitsa Spasova
+		Kai Standvoß
+
+Research Question: 
+Does human prototypicality ratings correlate with neural network categorisation?
+
+
+
+Methods description (max 400 words):
+We use a pertained neural network architecture called VGG16 which is trained on Imagenet. From the 1000 learned categories we select 10. We then use the network to classify images of those categories retrieved from Flickr. The network will output a probability for the classification of each category. 10 images per category are chosen evenly distributed over the output probabilities. These images will be presented to human participants. They are asked to classify the images and rate them according to their prototypicality.
+
+In the analysis both the prototypicality rating and classification reaction time is compared to the neural networks classification probability. As a baseline, we perform pixel based clustering on the images.
+
+
+
+Available materials:
+Images from Flickr are downloaded.
+The neural network architecture VGG16 is used.
+Participants are chosen among course participants.
+For the experiment, PsychoPy is used.
+
+
+
+
+Tasks, date and responsible person(s):
+
+All: Literature research
+Group: Select categorisations for images
+Germonda: Gathering images from Flickr
+Kai: Run images through neural network
+Group: Analyse results of NN
+Group: Pick 10 images from NN distribution
+Group: Design experiment
+Lisa: Implement experiment
+Ralitsa: Pilot study
+(Group: Possible redesign)
+Group: Actual study 17.10.
+Sometime before analysis and after images are chosen: Arianne: Clustering
+Analysis
+Group: Preparing presentation 07.11.
+Group: Writing report
+
+
+
+
+17-October: Testing
+7-November: Presentation
+
+

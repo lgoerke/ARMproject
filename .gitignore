@@ -1,2 +1,12 @@
+#Ignore NN architecture 
 /table/
 vgg16*
+
+#Ignore Mac’s filesystem files
+.DS_Store
+
+#Ignore Latex’s production files
+*.aux
+*.log
+*.out
+*.synctex.gz

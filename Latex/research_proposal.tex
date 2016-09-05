@@ -1,0 +1,111 @@
+\documentclass[11pt,a4paper,oneside]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+\usepackage[top=2cm, bottom=2.5cm, left=2.5cm, right=2cm]{geometry}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage[hyperfootnotes=true,
+       colorlinks=false,
+       bookmarksnumbered = true,
+       plainpages = false]{hyperref}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning,calc}
+\tikzset{box/.style={draw,shape=rectangle,minimum width=2cm,minimum
+height=2cm,text width=1cm,inner sep=1pt,text centered}}
+
+\usepackage{amsmath,amssymb}
+\usepackage{IEEEtrantools}
+\usepackage{listings}
+\usepackage{eulervm}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+% fancyhdr setup
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\cfoot{\footnotesize Advanced Research Methods --- Research Proposal, page \thepage\ of \pageref*{LastPage}}
+\pagestyle{fancy}
+
+% font and hypersetup
+\AtBeginDocument{
+  \usefont{\encodingdefault}{cmss}{m}{n}
+  \hypersetup{
+    pdftitle    = {ARM Research Proposal},
+    pdfauthor   = {Akif Berber, Lisa Goerke, Arianne van der Griend, Germonda Mooij, Ralitsa Spasova, Kai Standvoß},
+    pdfsubject  = {ARM Research Proposal},
+    pdfcreator  = {LaTeX},
+  }
+  \thispagestyle{empty}
+  }
+
+
+\def\maketitle{ %
+  \noindent Akif Berber \hfill Germonda Mooij\\
+  Lisa Goerke \hfill Ralitsa Spasova\\ 
+  Arianne van der Griend \hfill Kai Standvoß
+  \begin{center}\Large\textbf{
+  Advanced Research Methods --- Research Proposal \\
+  \vspace{0.5cm}
+  \LARGE
+  Does human prototypicality ratings correlate with neural network categorization?}
+  \vskip\baselineskip
+  \hrule
+  \normalsize
+  \vspace{2mm}
+  \end{center}
+} % end \maketitle
+
+\lstset{
+   basicstyle=\footnotesize\ttfamily,
+   breaklines=true,
+   commentstyle=\color{blue},
+   keywordstyle=\color{NavyBlue}\textbf,
+   numberstyle=\tiny\color{gray},
+   numbers=left,
+   stringstyle=\color{orange},
+   xleftmargin=1cm,
+}
+
+\begin{document}
+\maketitle
+\section{Research Question}
+\section{Methods description}
+We use a pertained neural network architecture called VGG16 which is trained on Imagenet. From the 1000 learned categories we select 10. We then use the network to classify images of those categories retrieved from Flickr. The network will output a probability for the classification of each category. 10 images per category are chosen evenly distributed over the output probabilities. These images will be presented to human participants. They are asked to classify the images and rate them according to their prototypicality.
+
+In the analysis both the prototypicality rating and classification reaction time is compared to the neural networks classification probability. As a baseline, we perform pixel based clustering on the images.
+\section{Available materials}
+Images from Flickr are downloaded.
+The neural network architecture VGG16 is used.
+Participants are chosen among course participants.
+For the experiment, PsychoPy is used.
+\section{Tasks, date and responsible persons}
+\begin{tabular}{p{6cm} p{4.25cm} l}
+Task & Date & Responsible persons \\
+\hline
+Finalize research plan & 12/09/2016 & Group \\
+Literature research & & All \\
+Select categorisations for images & & Group \\
+Gathering images from Flickr & & Germonda\\
+Run images through neural network & & Kai \\
+Analyse results of NN & & Group\\
+Pick 10 images/category from NN distribution & & Group \\
+Design experiment & & Group\\
+Implement experiment & & Lisa \\
+Pilot study & & Ralitsa \\
+Possible redesign & & Group \\
+Actual study & 17/10/2016 & Group\\
+Clustering on images & After picking of images, before analysis & Arianne \\
+Analysis & & \\
+Preparing presentation & 07/11/2016 & Group\\
+Writing report & & Group
+\end{tabular}
+
+\end{document}
