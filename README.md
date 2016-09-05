@@ -4,6 +4,11 @@ Project for the course 'Advanced Research Methods'.
 
 CollaborationAssessment on Google Docs so that format problems are avoided https://docs.google.com/document/d/1p_dcNYnDBCOZLT1lT0Tw7iKHCBbx0M3_QsGcAIOORMU/edit?usp=sharing
 
+Steps to run NN:
+* go to https://github.com/heuritech/convnets-keras
+* follow steps to install h5py, Theano and Keras
+* download VGG16 weights following provided link
+
 References
 
 * Principles of Categorization
