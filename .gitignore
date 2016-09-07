@@ -1,6 +1,12 @@
 #Ignore NN architecture 
 /table/
+/car/
+/airplane/
+/church/
 vgg16*
+
+#Ignore iPython checkpoints
+.ipynb_checkpoints/
 
 #Ignore Mac’s filesystem files
 .DS_Store

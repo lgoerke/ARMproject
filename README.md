@@ -6,8 +6,11 @@ CollaborationAssessment on Google Docs so that format problems are avoided https
 
 Steps to run NN:
 * go to https://github.com/heuritech/convnets-keras
-* follow steps to install h5py, Theano and Keras
+* follow steps to install h5py, Theano, Keras and flickrapi
 * download VGG16 weights following provided link
+* run script to get Flickrimages (folders will be created by script)
+* run classification
+* NB: downloaded images and weights will be ignored by git to avoid too large files (cf gitignore)
 
 References
 
