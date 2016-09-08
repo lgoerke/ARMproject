@@ -55,7 +55,7 @@ height=2cm,text width=1cm,inner sep=1pt,text centered}}
   Advanced Research Methods --- Research Proposal \\
   \vspace{0.5cm}
   \LARGE
-  Does human prototypicality ratings correlate with neural network categorization?}
+  Do human prototypicality ratings correlate with neural network categorization?}
   \vskip\baselineskip
   \hrule
   \normalsize
@@ -76,9 +76,8 @@ height=2cm,text width=1cm,inner sep=1pt,text centered}}
 
 \begin{document}
 \maketitle
-\section{Research Question}
 \section{Methods description}
-We use a pertained neural network architecture called VGG16 which is trained on Imagenet. From the 1000 learned categories we select 10. We then use the network to classify images of those categories retrieved from Flickr. The network will output a probability for the classification of each category. 10 images per category are chosen evenly distributed over the output probabilities. These images will be presented to human participants. They are asked to classify the images and rate them according to their prototypicality.
+We use a pretrained neural network architecture called VGG16 which is trained on Imagenet. From the 1000 learned categories we select 10. We then use the network to classify images of those categories retrieved from Flickr. The network will output a probability for the classification of each category. 10 images per category are chosen evenly distributed over the output probabilities. These images will be presented to human participants. They are asked to classify the images and rate them according to their prototypicality.
 
 In the analysis both the prototypicality rating and classification reaction time is compared to the neural networks classification probability. As a baseline, we perform pixel based clustering on the images.
 \section{Available materials}
@@ -87,13 +86,14 @@ The neural network architecture VGG16 is used.
 Participants are chosen among course participants.
 For the experiment, PsychoPy is used.
 \section{Tasks, date and responsible persons}
-\begin{tabular}{p{6cm} p{4.25cm} l}
+\begin{tabular}{p{5.75cm} p{4.25cm} l}
 Task & Date & Responsible persons \\
 \hline
 Finalize research plan & 12/09/2016 & Group \\
 Literature research & & All \\
-Select categorisations for images & & Group \\
+Select categorisations for images & 12/09/2016 & Group \\
 Gathering images from Flickr & & Germonda\\
+Check for biases in images of Flickr and Image-Net (lighting conditions, variance) & & Germonda\\
 Run images through neural network & & Kai \\
 Analyse results of NN & & Group\\
 Pick 10 images/category from NN distribution & & Group \\
@@ -102,7 +102,7 @@ Implement experiment & & Lisa \\
 Pilot study & & Ralitsa \\
 Possible redesign & & Group \\
 Actual study & 17/10/2016 & Group\\
-Clustering on images & After picking of images, before analysis & Arianne \\
+Clustering on images and/or statistical classification & After picking of images, before analysis & Arianne \\
 Analysis & & \\
 Preparing presentation & 07/11/2016 & Group\\
 Writing report & & Group
