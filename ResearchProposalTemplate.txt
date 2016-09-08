@@ -5,7 +5,7 @@ Research Proposal Template
 Group: 		D
 Members: 	Akif Berber
 		Lisa Goerke
-		Arianne van der Griend
+		Arianne van de Griend
 		Germonda Mooij
 		Ralitsa Spasova
 		Kai Standvoß
@@ -16,7 +16,7 @@ Does human prototypicality ratings correlate with neural network categorisation?
 
 
 Methods description (max 400 words):
-We use a pertained neural network architecture called VGG16 which is trained on Imagenet. From the 1000 learned categories we select 10. We then use the network to classify images of those categories retrieved from Flickr. The network will output a probability for the classification of each category. 10 images per category are chosen evenly distributed over the output probabilities. These images will be presented to human participants. They are asked to classify the images and rate them according to their prototypicality.
+We use a pertained deep neural network architecture called VGG16 which is trained on Imagenet. From the 1000 learned categories we select 10. We then use the network to classify images of those categories retrieved from Flickr. The network will output a probability for the classification of each category. 10 images per category are chosen evenly distributed over the output probabilities. These images will be presented to human participants. They are asked to classify the images and rate them according to their prototypicality.
 
 In the analysis both the prototypicality rating and classification reaction time is compared to the neural networks classification probability. As a baseline, we perform pixel based clustering on the images.
 
