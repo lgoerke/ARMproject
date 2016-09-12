@@ -12,8 +12,10 @@ Steps to run NN:
 * run classification
 * NB: downloaded images and weights will be ignored by git to avoid too large files (cf gitignore)
 
-References
+Todo:
+* Define dependent/independent variables
 
+References:
 * Principles of Categorization
 by Rosch (1978)
 * Posner & Keele (1968) 
