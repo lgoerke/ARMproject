@@ -11,7 +11,7 @@ flickr = flickrapi.FlickrAPI(key, secret)
 
 # Define terms for image search on Flickr
 # Terms should be sensible Categories and available Classes from ImageNet
-tags = ["table", "car", "airplane", "church"]
+tags = ["table", "car", "airplane", "church", "fruit", "house", "dog", "cat", "teapot", "table lamp", "castle", "pillow", "volcano", "coffee mug", "envelope"]
 
 # Download images per term
 for tag in tags:
