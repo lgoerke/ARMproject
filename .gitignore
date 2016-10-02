@@ -3,6 +3,7 @@
 /car/
 /airplane/
 /church/
+/data/
 vgg16*
 
 #Ignore iPython checkpoints
