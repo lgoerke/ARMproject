@@ -4,6 +4,7 @@
 /airplane/
 /church/
 /data/
+/imgs/
 vgg16*
 
 #Ignore iPython checkpoints

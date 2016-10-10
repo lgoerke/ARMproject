@@ -2,6 +2,7 @@
 from keras.optimizers import SGD
 from convnetskeras.convnets import preprocess_image_batch, convnet
 from convnetskeras.imagenet_tool import id_to_synset
+from scipy.misc import imread
 import json
 
 # Load an image (Use more later)
