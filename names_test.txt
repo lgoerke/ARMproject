@@ -1,0 +1,3 @@
+Images_Proto1: PrototypicalityTest 
+Images_Proto2: Prototypicality Test
+Images_Proto3: Prototypicality-Test
