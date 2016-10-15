@@ -35,7 +35,7 @@ for category in categories:
 	prob_cat[category]=probabilities
 	chosen_indices[category] = chosen_imgs
 
-pickle.dump(chosen_indices, open('chosen_indices3.pkl','wb'))
+pickle.dump(chosen_indices, open('chosen_indices1.pkl','wb'))
 print(chosen_indices)
 #print(prob_cat)
 selection = []
@@ -46,14 +46,14 @@ for category in categories:
 		selection.append(s)
 
 shuffle(selection)
-pickle.dump(selection, open('selection3.pkl','wb'))
+pickle.dump(selection, open('selection1.pkl','wb'))
 print(selection)
 
 prob_list=[]
 for ind,img in enumerate(selection):
 	tmp = img.split('_')
 	filename = 'imgs/' + tmp[1] + '/0000000' + tmp[0] + '.jpg'
-	copyfile(filename, 'imgs/shuffled3/' + str(1000+ind) + '_' + tmp[1] + '.jpg')
+	copyfile(filename, 'imgs/shuffled1/' + str(1000+ind) + '_' + tmp[1] + '.jpg')
 	var = cat_classifications[tmp[1]]
 	index = chosen_indices[tmp[1]]
 	var = index.index(int(tmp[0]))
@@ -61,7 +61,7 @@ for ind,img in enumerate(selection):
 	prob_list.append(numpy.array([1000+ind,tmp[1],prob]))
 
 print(prob_list)
-pickle.dump(prob_list, open('prob_list3.pkl','wb'))
-scipy.io.savemat('prob_list3.mat', mdict={'probability_list3':numpy.array(prob_list,dtype=numpy.object)})
+pickle.dump(prob_list, open('prob_list1.pkl','wb'))
+scipy.io.savemat('prob_list1.mat', mdict={'probability_list1':numpy.array(prob_list,dtype=numpy.object)})
 
 
