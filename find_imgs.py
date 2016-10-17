@@ -57,7 +57,7 @@ for ind,img in enumerate(selection):
 	var = cat_classifications[tmp[1]]
 	index = chosen_indices[tmp[1]]
 	var = index.index(int(tmp[0]))
-	prob = cat_classifications[category][var]
+	prob = cat_classifications[tmp[1]][var]
 	prob_list.append(numpy.array([1000+ind,tmp[1],prob]))
 
 print(prob_list)
