@@ -43,9 +43,9 @@ p3.Properties.VariableNames = {'Picture_shuffled','Category_shuffled','Prob_shuf
 
 chosen_probs=readtable('chosen_probs.txt');
 
-surv1=readtable('Dataset1 Final.xlsx');
-surv2=readtable('Dataset2 Final.xlsx');
-surv3=readtable('Dataset3 Final.xlsx');
+surv1=readtable('Dataset1_Final.xlsx');
+surv2=readtable('Dataset2_Final.xlsx');
+surv3=readtable('Dataset3_Final.xlsx');
 
 s1=cell2table(table2cell(surv1).');
 s2=cell2table(table2cell(surv2).');
