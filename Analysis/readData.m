@@ -37,15 +37,15 @@ p3=sortrows(prob3_tbl,'RowNames');
 
 % p1, p2, and p3 should be the same if data is correct
 
-p1.Properties.VariableNames = {'Picture_shuffled','Category_shuffled','Prob_shuffled','Picture_chosen','Category_chosen','Prob_chosen'};
-p2.Properties.VariableNames = {'Picture_shuffled','Category_shuffled','Prob_shuffled','Picture_chosen','Category_chosen','Prob_chosen'};
-p3.Properties.VariableNames = {'Picture_shuffled','Category_shuffled','Prob_shuffled','Picture_chosen','Category_chosen','Prob_chosen'};
+p1.Properties.VariableNames = {'Picture_shuffled','Class_shuffled','Prob_shuffled','Picture_chosen','Class_chosen','Prob_chosen'};
+p2.Properties.VariableNames = {'Picture_shuffled','Class_shuffled','Prob_shuffled','Picture_chosen','Class_chosen','Prob_chosen'};
+p3.Properties.VariableNames = {'Picture_shuffled','Class_shuffled','Prob_shuffled','Picture_chosen','Class_chosen','Prob_chosen'};
 
 chosen_probs=readtable('chosen_probs.txt');
 
-surv1=readtable('Dataset1_Final.xlsx');
-surv2=readtable('Dataset2_Final.xlsx');
-surv3=readtable('Dataset3_Final.xlsx');
+surv1=readtable('Dataset1 Final.xlsx');
+surv2=readtable('Dataset2 Final.xlsx');
+surv3=readtable('Dataset3 Final.xlsx');
 
 s1=cell2table(table2cell(surv1).');
 s2=cell2table(table2cell(surv2).');
@@ -76,4 +76,3 @@ neuralnet_data=p1; % p1,p2,and p3 should be the same if data is correct
 
 save('human_data.mat','human_data');
 save('neuralnet_data.mat','neuralnet_data');
-
