@@ -53,9 +53,9 @@ p3.Image=strcat('pictures3/',p3.Picture_shuffled,'_',p3.Category_shuffled,'.jpg'
 
 chosen_probs=readtable('chosen_probs.txt'); % just to check, they are the same values as in 'n_prob_list1.mat' etc.
 
-surv1=readtable('Dataset1 Final.xlsx');
-surv2=readtable('Dataset2 Final.xlsx');
-surv3=readtable('Dataset3 Final.xlsx');
+surv1=readtable('Dataset1_Final.xlsx');
+surv2=readtable('Dataset2_Final.xlsx');
+surv3=readtable('Dataset3_Final.xlsx');
 
 s1=cell2table(table2cell(surv1).');
 s2=cell2table(table2cell(surv2).');

@@ -26,11 +26,22 @@ end
 
 % --- Re-calculate neural net probabilities from .json files
 
+%jsonfiles.table_i=[526, 736, 532];
+%jsonfiles.car_i=[407, 436, 468, 511, 609, 627, 656, 661, 751, 817, 717]; % + pickup
+%jsonfiles.airplane_i=[404, 895]; % + military plane
+%jsonfiles.church_i=[497];
+%jsonfiles.fruit_i=[988, 989, 998, 952, 953, 954, 955, 956, 957, 948, 949, 950, 951, 990, 984, 987, 948];
+%jsonfiles.house_i=[698, 663, 449]; % + boat house
+%jsonfiles.dog_i=[251, 268, 256, 253, 255, 254, 257, 159, 211, 210, 212, 214, 213, 216, 215, 219, 220, 221, 217, 218, 207, 209, 206, 205, 208, 193, 202, 194, 191, 204, 187, 203, 185, 192, 183, 199, 195, 181, 184, 201, 186, 200, 182, 188, 189, 190, 197, 196, 198, 179, 180, 177, 178, 175, 163, 174, 176, 160, 162, 161, 164, 168, 173, 170, 169, 165, 166, 167, 172, 171, 264, 263, 266, 265, 267, 262, 246, 242, 243, 248, 247, 229, 233, 234, 228, 231, 232, 230, 227, 226, 235, 225, 224, 223, 222, 236, 252, 237, 250, 249, 241, 239, 238, 240, 244, 245, 259, 261, 260, 258, 154, 153, 158, 152, 155, 151, 157, 156, 275]; % + African hunting dog
+%jsonfiles.teapot_i=[849]; 
+%jsonfiles.castle_i=[483];
+%jsonfiles.volcano_i=[980, 974]; % + geiser
+%jsonfiles.coffeemug_i=[504]; 
 jsonfiles.table_i=[526, 736, 532];
 jsonfiles.car_i=[407, 436, 468, 511, 609, 627, 656, 661, 751, 817];
 jsonfiles.airplane_i=[404];
 jsonfiles.church_i=[497];
-jsonfiles.fruit_i=[988, 989, 998, 952, 953, 954, 955, 956, 957, 948, 949, 950, 951, 990, 984, 987, 948];
+jsonfiles.fruit_i=[988, 989, 998, 952, 953, 954, 955, 956, 957, 948, 949, 950, 951, 990, 984, 987];
 jsonfiles.house_i=[698, 663];
 jsonfiles.dog_i=[251, 268, 256, 253, 255, 254, 257, 159, 211, 210, 212, 214, 213, 216, 215, 219, 220, 221, 217, 218, 207, 209, 206, 205, 208, 193, 202, 194, 191, 204, 187, 203, 185, 192, 183, 199, 195, 181, 184, 201, 186, 200, 182, 188, 189, 190, 197, 196, 198, 179, 180, 177, 178, 175, 163, 174, 176, 160, 162, 161, 164, 168, 173, 170, 169, 165, 166, 167, 172, 171, 264, 263, 266, 265, 267, 262, 246, 242, 243, 248, 247, 229, 233, 234, 228, 231, 232, 230, 227, 226, 235, 225, 224, 223, 222, 236, 252, 237, 250, 249, 241, 239, 238, 240, 244, 245, 259, 261, 260, 258, 154, 153, 158, 152, 155, 151, 157, 156];
 jsonfiles.teapot_i=[849]; 
@@ -60,9 +71,9 @@ end
 for i=1:size(jsonfiles.airplane_i,2)
     jsonfiles.json(:,7)=jsonfiles.json(:,7)+airplane(:,jsonfiles.airplane_i(i)+1);
 end
-%for i=1:size(jsonfiles.coffeemug_i,2)
-%jsonfiles.json(:,8)=jsonfiles.json(:,8)+coffeemug(:,jsonfiles.coffeemug_i(i)+1);
-%end
+for i=1:size(jsonfiles.coffeemug_i,2)
+    jsonfiles.json(:,8)=jsonfiles.json(:,8)+coffeemug(:,jsonfiles.coffeemug_i(i)+1);
+end
 for i=1:size(jsonfiles.volcano_i,2)
     jsonfiles.json(:,9)=jsonfiles.json(:,9)+volcano(:,jsonfiles.volcano_i(i)+1);
 end
@@ -117,7 +128,7 @@ for ic=1:nc
     end
 end
 
-human.mean_score=mode(human.score_per_cat,3);
+human.mean_score=median(human.score_per_cat,3);
 human.std_score=std(human.score_per_cat,0,3);
 human.min_score=human.mean_score-human.std_score;
 human.max_score=human.mean_score+human.std_score;

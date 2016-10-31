@@ -1,0 +1,23 @@
+sips -s format png airplane_hist.pdf --out airplane_hist.png
+sips -s format png castle_hist.pdf --out castle_hist.png
+sips -s format png car_hist.pdf --out car_hist.png
+sips -s format png dog_hist.pdf --out dog_hist.png
+sips -s format png house_hist.pdf --out house_hist.png
+sips -s format png teapot_hist.pdf --out teapot_hist.png
+sips -s format png volcano_hist.pdf --out volcano_hist.png
+sips -s format png fruit_hist.pdf --out fruit_hist.png
+sips -s format png church_hist.pdf --out church_hist.png
+sips -s format png table_hist.pdf --out table_hist.png
+sips -s format png coffeemug_hist.pdf --out coffeemug_hist.png
+
+sips -s format png airplane_regr.pdf --out airplane_regr.png
+sips -s format png castle_regr.pdf --out castle_regr.png
+sips -s format png car_regr.pdf --out car_regr.png
+sips -s format png dog_regr.pdf --out dog_regr.png
+sips -s format png house_regr.pdf --out house_regr.png
+sips -s format png teapot_regr.pdf --out teapot_regr.png
+sips -s format png volcano_regr.pdf --out volcano_regr.png
+sips -s format png fruit_regr.pdf --out fruit_regr.png
+sips -s format png church_regr.pdf --out church_regr.png
+sips -s format png table_regr.pdf --out table_regr.png
+sips -s format png coffeemug_regr.pdf --out coffeemug_regr.png

@@ -37,12 +37,15 @@ h = ttest(human.score_per_cat(1,1,:),neuralnet.score_per_cat_on_human_scale(1,1)
 
 ifig=0;
 for ic=1:nc
-    figure;%('units','normalized','outerposition',[0 0 1 1]);
+    figure('units','normalized','outerposition',[0 0 1 1]);
     for ic_ip=1:np_nc
-        ax1=subplot(4,np_nc/2,ic_ip+org.pc(ic)/2*floor(2*(ic_ip-1)/org.pc(ic)));
+        ax1=subplot(4,np_nc/2,ic_ip+10/2*floor(2*(ic_ip-1)/10));
+        %ax1=subplot(4,np_nc/2,ic_ip+org.pc(ic)/2*floor(2*(ic_ip-1)/org.pc(ic)));
         histogram(ax1,human.score_per_cat(ic,ic_ip,:));
         hold on;
-        histogram(ax1,neuralnet.score_per_cat_on_human_scale(ic,ic_ip,:),'LineWidth',2,'FaceColor','k');
+        nn=ones(10,1);
+        nn=nn*neuralnet.score_per_cat_on_human_scale(ic,ic_ip,:);
+        histogram(ax1,nn,'FaceColor','k');
         title(ax1,strrep(human.picture(org.pic_ic_ip(ic,ic_ip)),'_',' '));
         axis(ax1,[0 8 0 50]);
         ax2=subplot(4,np_nc/2,ic_ip+org.pc(ic)/2*(floor(2*(ic_ip-1)/org.pc(ic))+1));
@@ -95,7 +98,7 @@ for ic=1:nc
 
     % --- regression plots
 
-    figure;%('units','normalized','outerposition',[0 0 1 1]);
+    figure('units','normalized','outerposition',[0 0 1 1]);
     ax1 = subplot(2,2,1);
     %plot(ax1, sn, sh, 'bo');
     errorbar(ax1, sn, sh, shs,'bo');
@@ -151,15 +154,17 @@ for ic=1:nc
     
 end
 
-figure;%('units','normalized','outerposition',[0 0 1 1]);
+figure('units','normalized','outerposition',[0 0 1 1]);
 ax1=subplot(1,2,1);
 bar(ax1,rho_nh );% wanted to add category labels but bar does not allow
 set(gca,'XTickLabel',org.category);
 ax1.XTickLabelRotation=90;
+title(ax1,'Pearson pairwise linear correlation coefficient ');
 ax2=subplot(1,2,2);
 bar(ax2,pval_nh); % wanted to add category labels but bar does not allow
 set(gca,'XTickLabel',org.category);
 ax2.XTickLabelRotation=90;
+title(ax2,'Pearson p value')
 
 ifig=ifig+1;
 save2pdf('pdf/spearman.pdf',ifig,500);
