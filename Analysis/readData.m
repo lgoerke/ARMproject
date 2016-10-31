@@ -1,4 +1,10 @@
 
+% MATLAB code to anaylse results in the Advanced Research Method's 
+% group D project 'Does human prototypicality ratings correlate
+% with neural network categorization?'.
+
+% Reading the data from the survey adn neuralnet results
+
 clear all
 
 load('n_prob_list1.mat');
@@ -35,13 +41,17 @@ p1=sortrows(prob1_tbl,'RowNames');
 p2=sortrows(prob2_tbl,'RowNames');
 p3=sortrows(prob3_tbl,'RowNames');
 
+p1.Properties.VariableNames = {'Picture_shuffled','Category_shuffled','Prob_shuffled','Picture_chosen','Category_chosen','Prob_chosen'};
+p2.Properties.VariableNames = {'Picture_shuffled','Category_shuffled','Prob_shuffled','Picture_chosen','Category_chosen','Prob_chosen'};
+p3.Properties.VariableNames = {'Picture_shuffled','Category_shuffled','Prob_shuffled','Picture_chosen','Category_chosen','Prob_chosen'};
+
+p1.Image=strcat('pictures1/',p1.Picture_shuffled,'_',p1.Category_shuffled,'.jpg');
+p2.Image=strcat('pictures2/',p2.Picture_shuffled,'_',p2.Category_shuffled,'.jpg');
+p3.Image=strcat('pictures3/',p3.Picture_shuffled,'_',p3.Category_shuffled,'.jpg');
+
 % p1, p2, and p3 should be the same if data is correct
 
-p1.Properties.VariableNames = {'Picture_shuffled','Class_shuffled','Prob_shuffled','Picture_chosen','Class_chosen','Prob_chosen'};
-p2.Properties.VariableNames = {'Picture_shuffled','Class_shuffled','Prob_shuffled','Picture_chosen','Class_chosen','Prob_chosen'};
-p3.Properties.VariableNames = {'Picture_shuffled','Class_shuffled','Prob_shuffled','Picture_chosen','Class_chosen','Prob_chosen'};
-
-chosen_probs=readtable('chosen_probs.txt');
+chosen_probs=readtable('chosen_probs.txt'); % just to check, they are the same values as in 'n_prob_list1.mat' etc.
 
 surv1=readtable('Dataset1 Final.xlsx');
 surv2=readtable('Dataset2 Final.xlsx');
@@ -76,3 +86,4 @@ neuralnet_data=p1; % p1,p2,and p3 should be the same if data is correct
 
 save('human_data.mat','human_data');
 save('neuralnet_data.mat','neuralnet_data');
+
