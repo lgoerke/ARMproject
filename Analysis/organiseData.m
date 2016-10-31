@@ -60,9 +60,9 @@ end
 for i=1:size(jsonfiles.airplane_i,2)
     jsonfiles.json(:,7)=jsonfiles.json(:,7)+airplane(:,jsonfiles.airplane_i(i)+1);
 end
-%for i=1:size(jsonfiles.coffeemug_i,2)
-%jsonfiles.json(:,8)=jsonfiles.json(:,8)+coffeemug(:,jsonfiles.coffeemug_i(i)+1);
-%end
+for i=1:size(jsonfiles.coffeemug_i,2)
+    jsonfiles.json(:,8)=jsonfiles.json(:,8)+coffeemug(:,jsonfiles.coffeemug_i(i)+1);
+end
 for i=1:size(jsonfiles.volcano_i,2)
     jsonfiles.json(:,9)=jsonfiles.json(:,9)+volcano(:,jsonfiles.volcano_i(i)+1);
 end
@@ -117,7 +117,7 @@ for ic=1:nc
     end
 end
 
-human.mean_score=mode(human.score_per_cat,3);
+human.mean_score=median(human.score_per_cat,3);
 human.std_score=std(human.score_per_cat,0,3);
 human.min_score=human.mean_score-human.std_score;
 human.max_score=human.mean_score+human.std_score;
