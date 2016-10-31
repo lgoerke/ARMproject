@@ -24,7 +24,7 @@ for key in d.keys():
 		obj_arr[i][0] = indx
 		obj_arr[i][1] = key
 		obj_arr[i][2] = np.sum(im[indices[key]])
-		savemat('networkClassification.mat', mdict={'classifications': obj_arr})
+		i +=1		
 
 
 		#max = np.argmax(imgs[key][indx])
@@ -34,3 +34,4 @@ for key in d.keys():
 		#	print(indx, np.sum(im[indices[key]]))
 		#if max not in indices[key]:
 		#	print(key, indx, id_to_words(max), max)
+savemat('networkClassification.mat', mdict={'classifications': obj_arr})
