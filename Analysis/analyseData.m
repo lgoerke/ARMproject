@@ -43,7 +43,9 @@ for ic=1:nc
         %ax1=subplot(4,np_nc/2,ic_ip+org.pc(ic)/2*floor(2*(ic_ip-1)/org.pc(ic)));
         histogram(ax1,human.score_per_cat(ic,ic_ip,:));
         hold on;
-        histogram(ax1,neuralnet.score_per_cat_on_human_scale(ic,ic_ip,:),'LineWidth',2,'FaceColor','k');
+        nn=ones(10,1);
+        nn=nn*neuralnet.score_per_cat_on_human_scale(ic,ic_ip,:);
+        histogram(ax1,nn,'FaceColor','k');
         title(ax1,strrep(human.picture(org.pic_ic_ip(ic,ic_ip)),'_',' '));
         axis(ax1,[0 8 0 50]);
         ax2=subplot(4,np_nc/2,ic_ip+org.pc(ic)/2*(floor(2*(ic_ip-1)/org.pc(ic))+1));
