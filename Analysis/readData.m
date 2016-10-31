@@ -7,9 +7,7 @@
 
 clear all
 
-load('n_prob_list1.mat');
-load('n_prob_list2.mat');
-load('n_prob_list3.mat');
+load('networkClassification.mat');
 
 shuffled1;
 shuffled2;
@@ -27,27 +25,15 @@ query3_tbl=cell2table(query3);
 % but the third source is different. Why is this?
 % I am guessing that the first two sources are more reliable?
 
-prob1_tbl=cell2table([prob1,probability_list1]);
-prob2_tbl=cell2table([prob2,probability_list2]);
-prob3_tbl=cell2table([prob3,probability_list3]);
-% prob1 and probability_list1 etc. should be the same if data is correct,
-% but they are not
+prob1_tbl=cell2table([prob1,classifications]);
 
 prob1_tbl.Properties.RowNames=query1;
-prob2_tbl.Properties.RowNames=query2;
-prob3_tbl.Properties.RowNames=query3;
 
 p1=sortrows(prob1_tbl,'RowNames');
-p2=sortrows(prob2_tbl,'RowNames');
-p3=sortrows(prob3_tbl,'RowNames');
 
 p1.Properties.VariableNames = {'Picture_shuffled','Category_shuffled','Prob_shuffled','Picture_chosen','Category_chosen','Prob_chosen'};
-p2.Properties.VariableNames = {'Picture_shuffled','Category_shuffled','Prob_shuffled','Picture_chosen','Category_chosen','Prob_chosen'};
-p3.Properties.VariableNames = {'Picture_shuffled','Category_shuffled','Prob_shuffled','Picture_chosen','Category_chosen','Prob_chosen'};
 
 p1.Image=strcat('pictures1/',p1.Picture_shuffled,'_',p1.Category_shuffled,'.jpg');
-p2.Image=strcat('pictures2/',p2.Picture_shuffled,'_',p2.Category_shuffled,'.jpg');
-p3.Image=strcat('pictures3/',p3.Picture_shuffled,'_',p3.Category_shuffled,'.jpg');
 
 % p1, p2, and p3 should be the same if data is correct
 
@@ -82,7 +68,7 @@ d2=sortrows(s2,'RowNames');
 d3=sortrows(s3,'RowNames');
 
 human_data=[d1,d2,d3];
-neuralnet_data=p1; % p1,p2,and p3 should be the same if data is correct
+neuralnet_data=p1; 
 
 save('human_data.mat','human_data');
 save('neuralnet_data.mat','neuralnet_data');
