@@ -5,8 +5,8 @@ import numpy as np
 import csv
 
 # Read the data
-categories = ["airplane", "car", "castle", "church", "coffeemug",
-              "dog", "fruit", "house", "table", "teapot", "vulcano"]
+categories = ["airplane", "car", "castle", "church", "coffee mug",
+              "dog", "fruit", "house", "table", "teapot", "volcano"]
 directory = os.curdir
 
 def readTestData(test_dir):
