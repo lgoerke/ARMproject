@@ -3,44 +3,53 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: paper.aux
 The style file: unsrtnat.bst
 Database file #1: sources.bib
-You've used 2 entries,
+Warning--I didn't find a database entry for "simonyan2014very"
+Warning--I didn't find a database entry for "rosch1975family"
+Warning--I didn't find a database entry for "lake2015deep"
+Warning--I didn't find a database entry for "minda2002comparing"
+Warning--I didn't find a database entry for "smith1998prototypes"
+Warning--I didn't find a database entry for "reed1972pattern"
+Warning--I didn't find a database entry for "rosch1999principles"
+Warning--I didn't find a database entry for "posner1968genesis"
+You've used 0 entries,
             2481 wiz_defined-function locations,
-            567 strings with 4602 characters,
-and the built_in function-call counts, 725 in all, are:
-= -- 59
-> -- 30
-< -- 2
-+ -- 12
-- -- 8
-* -- 53
-:= -- 118
-add.period$ -- 6
-call.type$ -- 2
-change.case$ -- 4
-chr.to.int$ -- 2
-cite$ -- 2
-duplicate$ -- 38
-empty$ -- 69
-format.name$ -- 14
-if$ -- 152
+            559 strings with 4552 characters,
+and the built_in function-call counts, 34 in all, are:
+= -- 0
+> -- 0
+< -- 0
++ -- 0
+- -- 0
+* -- 2
+:= -- 11
+add.period$ -- 0
+call.type$ -- 0
+change.case$ -- 0
+chr.to.int$ -- 0
+cite$ -- 0
+duplicate$ -- 0
+empty$ -- 1
+format.name$ -- 0
+if$ -- 1
 int.to.chr$ -- 1
-int.to.str$ -- 3
-missing$ -- 3
-newline$ -- 18
-num.names$ -- 6
-pop$ -- 18
+int.to.str$ -- 1
+missing$ -- 0
+newline$ -- 8
+num.names$ -- 0
+pop$ -- 0
 preamble$ -- 1
-purify$ -- 2
+purify$ -- 0
 quote$ -- 0
-skip$ -- 23
+skip$ -- 1
 stack$ -- 0
-substring$ -- 25
-swap$ -- 5
+substring$ -- 0
+swap$ -- 0
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 11
+type$ -- 0
 warning$ -- 0
-while$ -- 5
+while$ -- 0
 width$ -- 0
-write$ -- 33
+write$ -- 7
+(There were 8 warnings)
