@@ -37,25 +37,25 @@ h = ttest(human.score_per_cat(1,1,:),neuralnet.score_per_cat_on_human_scale(1,1)
 
 ifig=0;
 for ic=1:nc
-    figure('units','normalized','outerposition',[0 0 1 1]);
+    %figure('units','normalized','outerposition',[0 0 1 1]);
     for ic_ip=1:np_nc
-        ax1=subplot(4,np_nc/2,ic_ip+10/2*floor(2*(ic_ip-1)/10));
+        %ax1=subplot(4,np_nc/2,ic_ip+10/2*floor(2*(ic_ip-1)/10));
         %ax1=subplot(4,np_nc/2,ic_ip+org.pc(ic)/2*floor(2*(ic_ip-1)/org.pc(ic)));
-        histogram(ax1,human.score_per_cat(ic,ic_ip,:));
-        hold on;
-        nn=ones(10,1);
-        nn=nn*neuralnet.score_per_cat_on_human_scale(ic,ic_ip,:);
-        histogram(ax1,nn,'FaceColor','k');
-        title(ax1,strrep(human.picture(org.pic_ic_ip(ic,ic_ip)),'_',' '));
-        axis(ax1,[0 8 0 50]);
-        ax2=subplot(4,np_nc/2,ic_ip+org.pc(ic)/2*(floor(2*(ic_ip-1)/org.pc(ic))+1));
-        nn_image=cell2mat(neuralnet.image{org.pic_ic_ip(ic,ic_ip),1});
-        imagesc(ax2,imread(strrep(nn_image,'coffeemug','coffee mug')));
-        axis(ax2,'off');
+        %histogram(ax1,human.score_per_cat(ic,ic_ip,:));
+        %hold on;
+        %nn=ones(10,1);
+        %nn=nn*neuralnet.score_per_cat_on_human_scale(ic,ic_ip,:);
+        %histogram(ax1,nn,'FaceColor','k');
+        %title(ax1,strrep(human.picture(org.pic_ic_ip(ic,ic_ip)),'_',' '));
+        %axis(ax1,[0 8 0 50]);
+        %ax2=subplot(4,np_nc/2,ic_ip+org.pc(ic)/2*(floor(2*(ic_ip-1)/org.pc(ic))+1));
+        %nn_image=cell2mat(neuralnet.image{org.pic_ic_ip(ic,ic_ip),1});
+        %imagesc(ax2,imread(strrep(nn_image,'coffeemug','coffee mug')));
+        %axis(ax2,'off');
     end
-    ifig=ifig+1;
-    pdffile=cell2mat(strcat('pdf/',org.category(ic),'_hist.pdf'));
-    save2pdf(pdffile,ifig,500);
+    %ifig=ifig+1;
+    %pdffile=cell2mat(strcat('pdf/',org.category(ic),'_hist.pdf'));
+    %save2pdf(pdffile,ifig,500);
 end
 
 % STATISTICAL ANALYSIS
@@ -63,14 +63,22 @@ end
 rho_nh=zeros(nc,1); 
 pval_nh=zeros(nc,1);
 
+sh=zeros(np_nc,nc);
+shs=zeros(np_nc,nc);
+shl=zeros(np_nc,nc);
+shh=zeros(np_nc,nc);
+sn=zeros(np_nc,nc);
+sr=zeros(np_nc,nc);
+sfn=zeros(np_nc,nc);
+
 for ic=1:nc
     
-    sh = human.mean_score(ic,:).'; % human scores
-    shs= human.std_score(ic,:).'; % human scores
-    shl = human.min_score(ic,:).'; % human scores
-    shh = human.max_score(ic,:).'; % human scores
-    sn = neuralnet.score_per_cat(ic,:).'; % neural net scores
-    %sr = regression_score(ic,org.pc(ic)); % regression scores
+    sh(:,ic) = human.mean_score(ic,:).'; % human scores
+    shs(:,ic)= human.std_score(ic,:).'; % human scores
+    shl(:,ic) = human.min_score(ic,:).'; % human scores
+    shh(:,ic) = human.max_score(ic,:).'; % human scores
+    sn(:,ic) = neuralnet.score_per_cat(ic,:).'; % neural net scores
+    %sr(ic,:) = regression_score(ic,org.pc(ic)); % regression scores
     wh = 1./(0.5*human.std_score(ic,:).'); %ones(org.pc(ic),1);
     %wh = [1;1;1;1];
     wr = [1;1;1;1];
@@ -81,8 +89,8 @@ for ic=1:nc
     mdlFun_nh = @(b,x) b(1) + b(2)*x;
     %mdlFun = @(b,x) b(1).*(1-exp(-b(2).*x));
     start = [0, 0];
-    mdl_nh = fitnlm(sn,sh,mdlFun_nh,start,'Weight',wh);
-    res_nh = sh - predict(mdl_nh,sort(sn));
+    mdl_nh = fitnlm(sn(:,ic),sh(:,ic),mdlFun_nh,start,'Weight',wh);
+    sfn(:,ic) = predict(mdl_nh,sort(sn(:,ic)));
 
     % Fit of regression probabilities versus neural net probabilities
     %mdlFun_nr = @(b,x) b(1) + b(2)*x;
@@ -93,68 +101,42 @@ for ic=1:nc
     % --- Spearman's rank correlation
 
     % The article by Lake et al uses Spearman correlation
-    [rho_nh(ic), pval_nh(ic)] = corr(sn, sh);
+    %[rho_nh(ic), pval_nh(ic)] = corr(sn(:,ic), sh(:,ic));
     %[rho_nr, pval_nr] = corr(sn, sr);
 
     % --- regression plots
 
-    figure('units','normalized','outerposition',[0 0 1 1]);
-    ax1 = subplot(2,2,1);
-    %plot(ax1, sn, sh, 'bo');
-    errorbar(ax1, sn, sh, shs,'bo');
-    hold on;
-    plot(ax1,sort(sn),predict(mdl_nh,sort(sn)),'r-');
+    %figure;%('units','normalized','outerposition',[0 0 1 1]);
+    %ax1 = subplot(1,2,1);
+    %%plot(ax1, sn, sh, 'bo');
+    %errorbar(ax1, sn(:,ic), sh(:,ic), shs(:,ic),'bo');
+    %hold on;
+    %plot(ax1,sort(sn(:,ic)),predict(mdl_nh,sort(sn(:,ic))),'r-');
 
-    ax2 = subplot(2,2,2);
+    %ax2 = subplot(1,2,2);
     %plot(ax2, sn, sr, 'bo');
-    %old on;
+    %hold on;
     %plot(ax2,sort(sn),predict(mdl_nr,sort(sn)),'r-');
 
-    ax3 = subplot(2,2,3);
-    errorbar(ax3, sn, res_nh, shs, 'bo');
-    hold on;
-    plot(ax3,sort(sn),zeros(1,np_nc),'r-');
-
-    ax4 = subplot(2,2,4);
-    %plot(ax4, sn, res_nr, 'bo');
-    hold on;
-    %plot(ax4,sort(sn),zeros(1,np),'r-');
-
     % --- plotting layout
-    title(ax1,strcat(org.category(ic),': human - neural net comparison'));
-    xlim(ax1, [0 1.1]);
-    ylim(ax1, [0 8]);
-    xlabel(ax1, 'neural net probability');
-    ylabel(ax1, 'human score');
-    title(ax2,strcat(org.category(ic),': regression - neural net comparison'));
-    xlim(ax2, [0 1.1]);
-    ylim(ax2, [0 1.1]);
-    xlabel(ax2, 'neural net probability');
-    ylabel(ax2, 'regression probability');
-    title(ax3,'residuals for fit of human scores');
-    xlim(ax3, [0 1.1]);
-    ylim(ax3, [-4 4]);
-    xlabel(ax3, 'neural net probability');
-    ylabel(ax3, 'human score');
-    title(ax4,'residuals for fit of regression probabilities');
-    xlim(ax4, [0 1.1]);
-    ylim(ax4, [-1.1 1.1]);
-    xlabel(ax4, 'neural net probability');
-    ylabel(ax4, 'regression probability');
+    %title(ax1,strcat(org.category(ic),': human - neural net comparison'));
+    %xlim(ax1, [0 1.1]);
+    %ylim(ax1, [0 8]);
+    %xlabel(ax1, 'neural net probability');
+    %ylabel(ax1, 'human score');
+    %title(ax2,strcat(org.category(ic),': regression - neural net comparison'));
+    %xlim(ax2, [0 1.1]);
+    %ylim(ax2, [0 1.1]);
+    %xlabel(ax2, 'neural net probability');
+    %ylabel(ax2, 'regression probability');
 
-    %coeffvalues(fit_nh)
-    %confint_nh = confint(fit_nh)
-    %fit_nr = fit(sn,sr,'poly2')
-    %plot(fit_nh,sn,sh,'Residuals')
-    %[fit_nh,gof,output] = fit(sn,sh,'poly2')%,'normalize','on')
-    
     ifig=ifig+1;
     pdffile=cell2mat(strcat('pdf/',org.category(ic),'_regr.pdf'));
-    save2pdf(strcat(pdffile),ifig,500);
+    %save2pdf(strcat(pdffile),ifig,500);
     
 end
 
-figure('units','normalized','outerposition',[0 0 1 1]);
+figure;%('units','normalized','outerposition',[0 0 1 1]);
 ax1=subplot(1,2,1);
 bar(ax1,rho_nh );% wanted to add category labels but bar does not allow
 set(gca,'XTickLabel',org.category);
@@ -164,8 +146,46 @@ ax2=subplot(1,2,2);
 bar(ax2,pval_nh); % wanted to add category labels but bar does not allow
 set(gca,'XTickLabel',org.category);
 ax2.XTickLabelRotation=90;
-title(ax2,'Pearson p value')
+title(ax2,'Pearson p value');
 
 ifig=ifig+1;
-save2pdf('pdf/spearman.pdf',ifig,500);
+%save2pdf('pdf/spearman.pdf',ifig,500);
+
+
+figure('units','normalized','outerposition',[0 0 1 1]);
+orient landscape;
+
+ax1 = subplot(2,2,1);
+errorbar(ax1, sn(:,1), sh(:,1), shs(:,1),'bo');
+hold on;
+plot(ax1,sort(sn(:,1)),sfn(:,1),'r-');
+title(ax1,'fruit');
+xlim(ax1, [0 1.1]);
+ylim(ax1, [0 8]);
+
+ax2 = subplot(2,2,2);
+errorbar(ax2, sn(:,3), sh(:,3), shs(:,3),'bo');
+hold on;
+plot(ax2,sort(sn(:,3)),sfn(:,3),'r-');
+title(ax2,'dog');
+xlim(ax2, [0 1.1]);
+ylim(ax2, [0 8]);
+
+ax3 = subplot(2,2,3);
+errorbar(ax3, sn(:,7), sh(:,7), shs(:,7),'bo');
+hold on;
+plot(ax3,sort(sn(:,7)),sfn(:,7),'r-');
+title(ax3,'airplane');
+xlim(ax3, [0 1.1]);
+ylim(ax3, [0 8]);
+
+ax4 = subplot(2,2,4);
+errorbar(ax4, sn(:,9), sh(:,9), shs(:,9),'bo');
+hold on;
+plot(ax4,sort(sn(:,9)),sfn(:,9),'r-');
+title(ax4,'volcano');
+xlim(ax4, [0 1.1]);
+ylim(ax4, [0 8]);
+
+save2pdf('pdf/fourplotsforsignificantcategories.pdf',ifig,500);
 

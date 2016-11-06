@@ -9,6 +9,11 @@ clear all
 
 load('networkClassification.mat');
 
+% Logistic regression classification
+logreg1_tbl=readtable('logreg/temp1.csv');
+%logreg2_tbl=readtable('logreg/temp2.csv');
+%logreg3_tbl=readtable('logreg/temp3.csv');
+
 shuffled1;
 shuffled2;
 shuffled3;
@@ -26,14 +31,15 @@ query3_tbl=cell2table(query3);
 % I am guessing that the first two sources are more reliable?
 
 prob1_tbl=cell2table([prob1,classifications]);
-
 prob1_tbl.Properties.RowNames=query1;
-
 p1=sortrows(prob1_tbl,'RowNames');
-
 p1.Properties.VariableNames = {'Picture_shuffled','Category_shuffled','Prob_shuffled','Picture_chosen','Category_chosen','Prob_chosen'};
-
 p1.Image=strcat('pictures1/',p1.Picture_shuffled,'_',p1.Category_shuffled,'.jpg');
+
+logreg1_tbl.Properties.RowNames=query1;
+lr1=sortrows(logreg1_tbl,'RowNames');
+%lr1.Properties.VariableNames = {'Picture_shuffled','Category_shuffled','Prob_shuffled','Picture_chosen','Category_chosen','Prob_chosen'};
+%lr1.Image=strcat('pictures1/',p1.Picture_shuffled,'_',p1.Category_shuffled,'.jpg');
 
 % p1, p2, and p3 should be the same if data is correct
 
