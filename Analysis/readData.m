@@ -3,7 +3,7 @@
 % group D project 'Does human prototypicality ratings correlate
 % with neural network categorization?'.
 
-% Reading the data from the survey adn neuralnet results
+% Reading the data from the survey and neuralnet results
 
 clear all
 
@@ -38,7 +38,7 @@ p1.Image=strcat('pictures1/',p1.Picture_shuffled,'_',p1.Category_shuffled,'.jpg'
 
 logreg1_tbl.Properties.RowNames=query1;
 lr1=sortrows(logreg1_tbl,'RowNames');
-%lr1.Properties.VariableNames = {'Picture_shuffled','Category_shuffled','Prob_shuffled','Picture_chosen','Category_chosen','Prob_chosen'};
+lr1.Properties.VariableNames = {'Picture_name','Prob_logreg'};
 %lr1.Image=strcat('pictures1/',p1.Picture_shuffled,'_',p1.Category_shuffled,'.jpg');
 
 % p1, p2, and p3 should be the same if data is correct
@@ -75,7 +75,9 @@ d3=sortrows(s3,'RowNames');
 
 human_data=[d1,d2,d3];
 neuralnet_data=p1; 
+logreg_data=lr1;
 
 save('human_data.mat','human_data');
 save('neuralnet_data.mat','neuralnet_data');
+save('logreg_data.mat','logreg_data');
 

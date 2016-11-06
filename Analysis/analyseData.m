@@ -21,6 +21,7 @@ clear all
 
 load('human.mat');
 load('neuralnet.mat');
+load('logreg.mat');
 load('org.mat');
 
 nc=size(neuralnet.score_per_cat,1);
@@ -31,7 +32,7 @@ np_nc=ceil(np/nc); % pictures per category, if this is the same for each categor
 % PLOTTING THE DATA PER PICTURE FOR ANALYSIS
 
 % ttests?
-h = ttest(human.score_per_cat(1,1,:),neuralnet.score_per_cat_on_human_scale(1,1));
+%h = ttest(human.score_per_cat(1,1,:),neuralnet.score_per_cat_on_human_scale(1,1));
 
 % --- Histogram plots of human and neural net data with pictures
 
@@ -62,6 +63,8 @@ end
 
 rho_nh=zeros(nc,1); 
 pval_nh=zeros(nc,1);
+rho_rh=zeros(nc,1); 
+pval_rh=zeros(nc,1);
 
 sh=zeros(np_nc,nc);
 shs=zeros(np_nc,nc);
@@ -78,7 +81,7 @@ for ic=1:nc
     shl(:,ic) = human.min_score(ic,:).'; % human scores
     shh(:,ic) = human.max_score(ic,:).'; % human scores
     sn(:,ic) = neuralnet.score_per_cat(ic,:).'; % neural net scores
-    %sr(ic,:) = regression_score(ic,org.pc(ic)); % regression scores
+    sr(:,ic) = logreg.score_per_cat(ic,:); % regression scores
     wh = 1./(0.5*human.std_score(ic,:).'); %ones(org.pc(ic),1);
     %wh = [1;1;1;1];
     wr = [1;1;1;1];
@@ -86,23 +89,24 @@ for ic=1:nc
     % --- correlation fitted to monotonous function with weights 1/std
 
     % Fit of human scores versus neural net probabilities
-    mdlFun_nh = @(b,x) b(1) + b(2)*x;
-    %mdlFun = @(b,x) b(1).*(1-exp(-b(2).*x));
+    mdlFun = @(b,x) b(1) + b(2)*x;
     start = [0, 0];
-    mdl_nh = fitnlm(sn(:,ic),sh(:,ic),mdlFun_nh,start,'Weight',wh);
+    mdl_nh = fitnlm(sn(:,ic),sh(:,ic),mdlFun,start,'Weight',wh);
+    
     sfn(:,ic) = predict(mdl_nh,sort(sn(:,ic)));
 
     % Fit of regression probabilities versus neural net probabilities
-    %mdlFun_nr = @(b,x) b(1) + b(2)*x;
-    %start = [0, 0]
-    %mdl_nr = fitnlm(sn,sr,mdlFun_nr,start,'Weight',wr);
-    %res_nr = sr - predict(mdl_nr,sort(sn));
+    mdlFun = @(b,x) b(1) + b(2)*x;
+    start = [0, 0];
+    mdl_rh = fitnlm(sr(:,ic),sh(:,ic),mdlFun,start,'Weight',wh);
+    
+    sfr(:,ic) = predict(mdl_rh,sort(sr(:,ic)));
 
     % --- Spearman's rank correlation
 
     % The article by Lake et al uses Spearman correlation
-    %[rho_nh(ic), pval_nh(ic)] = corr(sn(:,ic), sh(:,ic));
-    %[rho_nr, pval_nr] = corr(sn, sr);
+    [rho_nh(ic), pval_nh(ic)] = corr(sn(:,ic), sh(:,ic));
+    [rho_rh(ic), pval_rh(ic)] = corr(sr(:,ic), sh(:,ic));
 
     % --- regression plots
 
@@ -111,12 +115,13 @@ for ic=1:nc
     %%plot(ax1, sn, sh, 'bo');
     %errorbar(ax1, sn(:,ic), sh(:,ic), shs(:,ic),'bo');
     %hold on;
-    %plot(ax1,sort(sn(:,ic)),predict(mdl_nh,sort(sn(:,ic))),'r-');
+    %plot(ax1,sort(sn(:,ic)),sfn(:,ic),'r-');
 
     %ax2 = subplot(1,2,2);
-    %plot(ax2, sn, sr, 'bo');
+    %%plot(ax2, sn, sr, 'bo');
+    %errorbar(ax2, sr(:,ic), sh(:,ic), shs(:,ic),'bo');
     %hold on;
-    %plot(ax2,sort(sn),predict(mdl_nr,sort(sn)),'r-');
+    %plot(ax2,sort(sr(:,ic)),sfr(:,ic),'r-');
 
     % --- plotting layout
     %title(ax1,strcat(org.category(ic),': human - neural net comparison'));
@@ -187,5 +192,40 @@ title(ax4,'volcano');
 xlim(ax4, [0 1.1]);
 ylim(ax4, [0 8]);
 
-save2pdf('pdf/fourplotsforsignificantcategories.pdf',ifig,500);
+%save2pdf('pdf/fourplotsforsignificantcategories.pdf',ifig,500);
+
+figure('units','normalized','outerposition',[0 0 1 1]);
+orient landscape;
+
+ax1 = subplot(2,2,1);
+errorbar(ax1, sr(:,1), sh(:,1), shs(:,1),'bo');
+hold on;
+plot(ax1,sort(sr(:,1)),sfr(:,1),'r-');
+title(ax1,'fruit');
+xlim(ax1, [0 1.1]);
+ylim(ax1, [0 8]);
+
+ax2 = subplot(2,2,2);
+errorbar(ax2, sr(:,3), sh(:,3), shs(:,3),'bo');
+hold on;
+plot(ax2,sort(sr(:,3)),sfr(:,3),'r-');
+title(ax2,'dog');
+xlim(ax2, [0 1.1]);
+ylim(ax2, [0 8]);
+
+ax3 = subplot(2,2,3);
+errorbar(ax3, sr(:,7), sh(:,7), shs(:,7),'bo');
+hold on;
+plot(ax3,sort(sr(:,7)),sfr(:,7),'r-');
+title(ax3,'airplane');
+xlim(ax3, [0 1.1]);
+ylim(ax3, [0 8]);
+
+ax4 = subplot(2,2,4);
+errorbar(ax4, sr(:,9), sh(:,9), shs(:,9),'bo');
+hold on;
+plot(ax4,sort(sr(:,9)),sfr(:,9),'r-');
+title(ax4,'volcano');
+xlim(ax4, [0 1.1]);
+ylim(ax4, [0 8]);
 

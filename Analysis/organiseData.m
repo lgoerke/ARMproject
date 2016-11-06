@@ -14,6 +14,7 @@ clear all
 
 load('human_data.mat');
 load('neuralnet_data.mat');
+load('logreg_data.mat');
 
 np=size(neuralnet_data,1); % number of pictures
 nh=size(human_data,2); % number of human participants
@@ -68,7 +69,6 @@ neuralnet.image=cell2table(neuralnet_data.Image);
 neuralnet.class=cell2table(neuralnet_data.Category_shuffled);
 neuralnet.score=neuralnet_data.Prob_chosen; % probability from sources 1. and 2.
 neuralnet.score_per_cat=zeros(nc, np_nc);
-neuralnet.json_probs=zeros(nc,np_nc,1000);
 for ic=1:nc
     for ic_ip=1:org.pc(ic)
         neuralnet.score_per_cat(ic,ic_ip)=neuralnet.score(org.pic_ic_ip(ic,ic_ip),1);
@@ -79,20 +79,28 @@ for ic=1:nc
 end
 neuralnet.score_per_cat_on_human_scale=neuralnet.score_per_cat*7;
 
-% find the best scoring index:
-max(sum(neuralnet.json_probs(1,:,:),2));
-find(sum(neuralnet.json_probs(1,:,:),2)>2); % this gives 952 for fruit
-
 human.class=neuralnet.class;
 
-% Regression probabilities
-%table=readtable('RegressionScores.txt');
-%regression_subject=table2array(table(:,1));
-%regression_class=table2array(table(:,2));
-%regression_picture=table2array(table(:,3));
-%regression_score=table2array(table(:,4));
+% --- Logistic regression probabilities
+logreg.picture=neuralnet.picture;
+logreg.piccat=neuralnet.picture;
+logreg.picnumber=neuralnet.picture;
+logreg.image=cell2table(neuralnet_data.Image);
+logreg.class=neuralnet.class;
+logreg.score=logreg_data.Prob_logreg;
+logreg.score_per_cat=zeros(nc, np_nc);
+for ic=1:nc
+    for ic_ip=1:org.pc(ic)
+        logreg.score_per_cat(ic,ic_ip)=logreg.score(org.pic_ic_ip(ic,ic_ip),1);
+        %logreg.score_per_cat(ic,ic_ip)=str2num(table2array(logreg.score{org.pic_ic_ip(ic,ic_ip),1}));
+        logreg.picnumber=strsplit(logreg.picture{org.pic_ic_ip(ic,ic_ip)},'_');
+        p1=str2num(cell2mat(logreg.picnumber(1)));
+    end
+end
+logreg.score_per_cat_on_human_scale=logreg.score_per_cat*7;
 
 save('human.mat','human');
 save('neuralnet.mat','neuralnet');
+save('logreg.mat','logreg');
 save('org.mat','org');
 
