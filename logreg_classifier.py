@@ -39,15 +39,21 @@ def writeResults(filename, model, test, true_labels, test_filename):
 print('Reading Train data')
 X = []
 y = []
+i = 0
 for category in categories:
-    i = 0
     for filename in os.listdir(directory + "\\data\\" + category):
-        if i < 20:
+        if True:  #i < 20:
             image = misc.imread(directory + "\\data\\" + category + "\\" + filename)
             image = misc.imresize(image, (224, 224, 3))
-            X.append(image.flatten())
-            y.append(category)
-        i += 1
+            if image.shape == (224, 224, 3):
+                X.append(image.flatten())
+                y.append(category)
+            else:
+                print(filename)
+                i += 1
+
+print(i)
+# print(set([image.shape for image in X]))
 
 # Test data
 print('Reading test data')
@@ -62,6 +68,6 @@ model.fit(X, y)
 
 # Results
 print('Writing Results')
-writeResults('logreg_results\\temp1.csv', model, test1, true_labels1, test_filename1)
-writeResults('logreg_results\\temp2.csv', model, test2, true_labels2, test_filename2)
-writeResults('logreg_results\\temp3.csv', model, test3, true_labels3, test_filename3)
+writeResults('logreg_results\\all1.csv', model, test1, true_labels1, test_filename1)
+writeResults('logreg_results\\all2.csv', model, test2, true_labels2, test_filename2)
+writeResults('logreg_results\\all3.csv', model, test3, true_labels3, test_filename3)
