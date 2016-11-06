@@ -40,11 +40,14 @@ print('Reading Train data')
 X = []
 y = []
 for category in categories:
+    i = 0
     for filename in os.listdir(directory + "\\data\\" + category):
-        image = misc.imread(directory + "\\data\\" + category + "\\" + filename)
-        image = misc.imresize(image, (224, 224, 3))
-        X.append(image.flatten())
-        y.append(category)
+        if i < 20:
+            image = misc.imread(directory + "\\data\\" + category + "\\" + filename)
+            image = misc.imresize(image, (224, 224, 3))
+            X.append(image.flatten())
+            y.append(category)
+        i += 1
 
 # Test data
 print('Reading test data')
