@@ -17,4 +17,6 @@ git commit -am 'asdfas'
 
 git pull
 
+git add newfile
+
 git push
